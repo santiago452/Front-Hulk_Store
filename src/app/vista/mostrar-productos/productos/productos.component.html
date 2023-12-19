@@ -1,0 +1,19 @@
+<div class="svg-background">
+<br><br><div class="container3">
+    <div>
+   
+    <section class="container-products">   
+    @for(producto of listadoProductos; track $index){
+        <div class="product">
+            <img src="http://drive.google.com/uc?export=view&id=1yn4fqFQA3FLPbX-mGYrJyfzzj6vyvDBq" class="product__img">
+            <div><br>
+               <h3><a href="" class="product__title">{{producto.nombre}}</a></h3>
+               <span class="product__precio">{{producto.precio}}</span>
+            </div>
+            <i class="product__icon fas fa-cart-plus"></i>
+        </div>
+    } 
+    </section>
+    </div>
+</div>     
+</div>         
