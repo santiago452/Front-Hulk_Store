@@ -4,6 +4,7 @@ import { CrearCuentaComponent } from './vista/formulario-loguarse/crear-cuenta/c
 import { MostrarProductosComponent } from './vista/mostrar-productos/mostrar-productos.component';
 import { AuthenticationGuard } from './services/AuthenticationGuard.service';
 import { ProductosComponent } from './vista/mostrar-productos/productos/productos.component';
+import { CarritoProductosComponent } from './vista/mostrar-productos/carrito-productos/carrito-productos.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,10 @@ export const routes: Routes = [
             {
                 path: '',
                 component: ProductosComponent
+            },
+            {
+                path: 'Carrito',
+                component: CarritoProductosComponent
             }
         ]
     }
