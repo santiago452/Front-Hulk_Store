@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ProductoService } from '../../../services/producto.service';
+import { ComunicacionComponentesService } from '../../../services/comunicacion-componentes.service';
 
 @Component({
   selector: 'app-productos',
@@ -10,19 +11,24 @@ import { ProductoService } from '../../../services/producto.service';
 })
 export class ProductosComponent {
  servicioProducto = inject(ProductoService);
+ servicioComunicacionComponentes = inject(ComunicacionComponentesService);
  listadoProductos: any[] = [];
   constructor() { }
 
   async ngOnInit(): Promise<void> {
     await this.listarProductos();
-    
   }
 
   async listarProductos(): Promise<void> {
     const productos = await this.servicioProducto.listarTodos().toPromise() as any;
-    console.log(productos);
     this.listadoProductos = productos;
-
   }
 
+  agregarAlCarrito(producto: any, url:string): void {
+    // Agregamos al producto la url de la imagen
+    producto.imagen = url;
+    producto.stock = producto.cantidad;
+    producto.cantidad = 1;
+    this.servicioComunicacionComponentes.actualizarCarroCompras(producto);
+  }
 }

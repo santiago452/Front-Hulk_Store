@@ -7,13 +7,13 @@
         <div class="product">
             <img src="http://drive.google.com/uc?export=view&id=1yn4fqFQA3FLPbX-mGYrJyfzzj6vyvDBq" class="product__img">
             <div><br>
-               <h3><a href="" class="product__title">{{producto.nombre}}</a></h3>
+               <h3>{{producto.nombre}}</h3>
                <span class="product__precio">{{producto.precio}}</span>
             </div>
-            <i class="product__icon fas fa-cart-plus"></i>
+            <a (click)="agregarAlCarrito(producto, 'http://drive.google.com/uc?export=view&id=1yn4fqFQA3FLPbX-mGYrJyfzzj6vyvDBq')" style="cursor: pointer;"><i class="product__icon fas fa-cart-plus"></i></a>
         </div>
     } 
     </section>
     </div>
 </div>     
-</div>         
+</div>
