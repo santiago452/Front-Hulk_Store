@@ -5,6 +5,8 @@ import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UsuarioService } from '../../../services/logueo-usuario.service';
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -30,7 +32,28 @@ export class LoginComponent {
   async iniciarSesion(): Promise<void> {
     if(this.formSesion.valid){
       const usuariosAll = await this.servicioUsuario.listarTodos().toPromise() as any;
-      const verificarUsuario = usuariosAll.find((usuario: any) => usuario.correo === this.formSesion.value.email && usuario.contrasena === this.formSesion.value.contrasena);
+      const verificarUsuario = usuariosAll.find((usuario: any) => usuario.correo === this.formSesion.value.email);
+      if (!verificarUsuario) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          showConfirmButton: false,
+          timer: 1500,
+          text: 'Correo incorrecto'
+        });
+        return;
+      }
+      console.log(CryptoJS.AES.decrypt(verificarUsuario.contrasena, 'secret key 123').toString(CryptoJS.enc.Utf8));
+      if (CryptoJS.AES.decrypt(verificarUsuario.contrasena, 'secret key 123').toString(CryptoJS.enc.Utf8) !== this.formSesion.value.contrasena) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          showConfirmButton: false,
+          timer: 1500,
+          text: 'Contraseña incorrecta'
+        });
+        return;
+      }
       // Colocamos un spinner mientras se verifica el usuario
       this.mostrarSpinner(true);
       if(verificarUsuario){
@@ -38,13 +61,7 @@ export class LoginComponent {
           this.mostrarSpinner(false);
           sessionStorage.setItem('usuario', JSON.stringify(verificarUsuario));
           this.router.navigate(['/Productos']);
-        }, 2000);
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'El correo o la contraseña son incorrectos',
-        });
+        }, 1000);
       }
     }
   }
