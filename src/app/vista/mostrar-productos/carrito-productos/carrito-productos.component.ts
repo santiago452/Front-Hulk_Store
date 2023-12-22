@@ -76,7 +76,7 @@ export class CarritoProductosComponent {
   }
   ngAfterViewInit() {
     setTimeout(() => {
-      if (this.articulos.length >= 2) {
+      if (this.articulos.length >= 1) {
         // Obtén la altura de la barra de navegación
         const navbarHeight = document.querySelector('.svg-background') as HTMLElement;
         navbarHeight?.setAttribute('style', `height: auto !important;`);
@@ -189,8 +189,10 @@ export class CarritoProductosComponent {
       this.subtotal = this.calcularSubtotal();
     }
 
-    if(this.articulos.length == 1){
-      const navbarHeight = document.querySelector('.svg-background') as HTMLElement;
+    let navbarHeight = document.querySelector('.svg-background') as HTMLElement;
+    if(this.articulos.length == 1 && window.innerWidth <= 912){
+      navbarHeight?.setAttribute('style', `height: auto !important;`);
+    }else if(this.articulos.length == 0 && window.innerWidth > 912){
       navbarHeight?.setAttribute('style', `height: 100% !important;`);
     }
     // También eliminamos el artículo del servicio de comunicación de componentes
