@@ -8,6 +8,8 @@ import { UsuarioService } from '../../../services/logueo-usuario.service';
 import { Usuario } from '../../../models/Usuario';
 // Swal
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'app-crear-cuenta',
   standalone: true,
@@ -48,7 +50,9 @@ export class CrearCuentaComponent {
       const usuario: Usuario = new Usuario();
       usuario.nombre = this.formSesion.value.nombre + ' ' + this.formSesion.value.apellido;
       usuario.correo = this.formSesion.value.email;
-      usuario.contrasena = this.formSesion.value.contrasena;
+      const contrasena = this.formSesion.get('contrasena')?.value;
+      const encryptedPassoword = CryptoJS.AES.encrypt(contrasena.trim(), 'secret key 123').toString();
+      usuario.contrasena = encryptedPassoword;
       this.servicioUsuario.registrar(usuario).subscribe(
         (response) => {
           console.log(response);

@@ -22,6 +22,7 @@ export class ProductosComponent {
   async listarProductos(): Promise<void> {
     const productos = await this.servicioProducto.listarTodos().toPromise() as any;
     this.listadoProductos = productos;
+    console.log(this.listadoProductos);
   }
 
   agregarAlCarrito(producto: any, url:string): void {
