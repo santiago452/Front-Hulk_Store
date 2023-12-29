@@ -5,3 +5,16 @@
     .control{
         width: 100%;
     }
+
+/* Una media query de 912 a 1400px */
+@media screen and (min-width: 912px) and (max-width: 1400px) {
+    .container{
+        height: auto;
+    }
+}
+/* Una media query de 1400 a 2000px */
+@media screen and (min-width: 1400px) and (max-width: 2000px) {
+    .container{
+        height: 100vh;
+    }
+}

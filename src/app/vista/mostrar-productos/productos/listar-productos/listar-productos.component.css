@@ -1,0 +1,111 @@
+.example-container {
+    max-width: 100%;
+    overflow: auto;
+    margin-top: 3%;
+    border-bottom: 20%;
+    box-shadow: 1px none #000;
+    margin-bottom: 3%;
+}
+
+.fade-in-out {
+    opacity: 0;
+    display: none;
+}
+
+button[disabled] {
+    pointer-events: none;
+  }
+  
+mat-card{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    background-color: unset;
+    color: #000;
+}
+
+mat-card-header{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000;
+}
+
+mat-form-field {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000;
+    width: 26%;
+}
+
+mat-form-field input{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000;
+}
+
+button{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.botonEditar{
+    /* Le ponemos un color bonito */
+    background-color: #4FA6F4;
+    color: #fff;
+}
+
+.botonEliminar{
+    /* Le ponemos un color bonito */
+    background-color: #ff0000;
+    color: #fff;
+}
+
+mat-icon{
+    position: relative;
+    top: 2px;
+}
+
+.texto-boton{
+    position: relative;
+    top: -4px;
+}
+
+/* Para dispositivos pequeños */
+@media screen and (max-width: 600px) {
+    .container{
+        margin-top: 135px;
+    }
+
+    button{
+        font-size: 14px;
+    }
+    .texto-boton{
+        top: -7px;
+    }
+
+    mat-form-field {
+        width: 39%;
+    }
+
+    /* Para el placeholder del mat-form-fiel */
+    mat-form-field input{
+        font-size: 14px;
+    }
+}
+
+

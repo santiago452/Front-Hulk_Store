@@ -61,18 +61,21 @@ export class CarritoProductosComponent {
   private unsubscribe$ = new Subject<void>();
   constructor(
     private el: ElementRef,
-    // private servicioComunicacion: ComunicacionComponentesService,
-    // private authService: SocialAuthService
   ) { }
 
   isLoggedIn = false;
   dataCarro: any = [] ;
+  usuarioLogueado: boolean = false;
   ngOnInit(): void {
     this.articulos = this.servicioComunicacion.carroCompras;
-    console.log(this.articulos);
     setTimeout(() => {
       this.subtotal = this.calcularSubtotal();
+      sessionStorage.setItem('carro', JSON.stringify(this.articulos));
     });
+    if (sessionStorage.getItem('usuario')) {
+      this.usuarioLogueado = true;
+    }
+    console.log(this.usuarioLogueado);
   }
   ngAfterViewInit() {
     setTimeout(() => {
@@ -102,48 +105,6 @@ export class CarritoProductosComponent {
 
   calcularAnchoColumnas() {
     setTimeout(() => {
-      // Si está en dispositivos grandes, no se calcula el ancho de las columnas
-      // if (window.innerWidth > 912) {
-      //   // Obtén todas las celdas de la fila de encabezado
-      //   const headerCells = this.el.nativeElement.querySelectorAll('.cart-table-cell') as NodeListOf<HTMLElement>;
-      //   const rowCells = this.el.nativeElement.querySelectorAll('.cart-table-row .cart-table-cell') as NodeListOf<HTMLElement>;
-      //   const eliminarButtons = this.el.nativeElement.querySelectorAll('.eliminar-button') as NodeListOf<HTMLElement>;
-      //   const totalElements = this.el.nativeElement.querySelectorAll('.total') as NodeListOf<HTMLElement>;
-    
-      //   // Calcula el ancho máximo de las celdas de encabezado
-      //   headerCells.forEach((headerCell: HTMLElement, index: number) => {
-      //     const headerWidth = headerCell.offsetWidth;
-      //     rowCells[index]?.setAttribute('style', `width: ${headerWidth}px;`);
-      //   });
-    
-      //   // Posiciona los botones de eliminar en la misma posición que los elementos de total
-      //   eliminarButtons.forEach((eliminarButton: HTMLElement, index: number) => {
-      //     const totalElement = totalElements[index];
-      //     const totalElementRect = totalElement.getBoundingClientRect();
-      //     eliminarButton.style.left = `${totalElementRect.left - 748}px`;
-      //     eliminarButton.style.width = `0px`;
-      //   });
-      // }else{
-      //   // Obtén todas las celdas de la fila de encabezado
-      //   const headerCells = this.el.nativeElement.querySelectorAll('.cart-table-cell') as NodeListOf<HTMLElement>;
-      //   const rowCells = this.el.nativeElement.querySelectorAll('.cart-table-row .cart-table-cell') as NodeListOf<HTMLElement>;
-      //   const eliminarButtons = this.el.nativeElement.querySelectorAll('.eliminar-button') as NodeListOf<HTMLElement>;
-      //   const totalElements = this.el.nativeElement.querySelectorAll('.total') as NodeListOf<HTMLElement>;
-    
-      //   // Calcula el ancho máximo de las celdas de encabezado
-      //   headerCells.forEach((headerCell: HTMLElement, index: number) => {
-      //     const headerWidth = headerCell.offsetWidth;
-      //     rowCells[index]?.setAttribute('style', `width: ${headerWidth}px;`);
-      //   });
-    
-      //   // Posiciona los botones de eliminar en la misma posición que los elementos de total
-      //   eliminarButtons.forEach((eliminarButton: HTMLElement, index: number) => {
-      //     const totalElement = totalElements[index];
-      //     const totalElementRect = totalElement.getBoundingClientRect();
-      //     eliminarButton.style.left = `${totalElementRect.left - 181}px`;
-      //     eliminarButton.style.width = `0px`;
-      //   });
-      // }
       const headerCells = this.el.nativeElement.querySelectorAll('.cart-table-cell') as NodeListOf<HTMLElement>;
         const rowCells = this.el.nativeElement.querySelectorAll('.cart-table-row .cart-table-cell') as NodeListOf<HTMLElement>;
         const eliminarButtons = this.el.nativeElement.querySelectorAll('.eliminar-button') as NodeListOf<HTMLElement>;

@@ -1,0 +1,72 @@
+<!-- Hacemos la interfaz de agregar usuario -->
+<div class="container-fluid">
+    <div class="paginaInicial">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #000;">
+                    <h1 class="titulo">Modificar el Usuario: {{nombreUsuario}}</h1>
+                    <!-- Volvemos al componente padre -->
+                    <button mat-raised-button class="botonVolver" color="primary" routerLink="../../"><mat-icon>arrow_back</mat-icon></button>
+                </div>
+            </div>
+            <form [formGroup]="formUsuario" novalidate autocomplete="off">
+                <div class="row">
+                    <!-- Comenzamos a maquetar los inputs -->
+                    <div class="col-md-6">
+                        <mat-form-field class="ms-5 ps-5" appearance="fill">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Ingrese nombre" formControlName="nombre"/>
+                            <mat-error *ngIf="formUsuario.controls['nombre'].hasError('required')">
+                                Por favor ingrese un nombre
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="ms-5 ps-5" appearance="fill">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput placeholder="Ingrese apellido" formControlName="apellido"/>
+                            <mat-error *ngIf="formUsuario.controls['apellido'].hasError('required')">
+                                Por favor ingrese un apellido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="ms-5 ps-5" appearance="fill">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput placeholder="Ingrese contraseña" formControlName="contrasena" type="text" autocomplete="current-password"/>
+                            <mat-error *ngIf="formUsuario.controls['contrasena'].hasError('required')">
+                              El campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="ms-5 ps-5" appearance="fill">
+                            <mat-label>Correo</mat-label>
+                            <input matInput placeholder="Ingrese correo" formControlName="email" autocomplete="email"/>
+                            <mat-error *ngIf="formUsuario.controls['email'].hasError('required')">
+                                Por favor ingrese un correo
+                            </mat-error>
+                            <mat-error *ngIf="formUsuario.get('email')?.hasError('noEsCorreo')"> Por favor ingrese un correo válido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="ms-5 ps-5" appearance="fill">
+                            <mat-label>Rol</mat-label>
+                            <mat-select [compareWith]="compareFunction" formControlName="rol">
+                                @for (roles of listaRoles; track $index){
+                                    <mat-option [value]="roles">{{roles.descripcion}}</mat-option>
+                                }
+                            </mat-select>
+                            <mat-error *ngIf="formUsuario.controls['rol'].hasError('required')">
+                                Por favor seleccione un rol
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+                <div class="d-flex justify-content-center mt-2">
+                    <button mat-raised-button class="botonEnviar" color="primary" (click)="agregarUsuario()" [disabled]="formUsuario.invalid">Modificar Usuario</button>
+                </div>
+            </div>
+        </div>
+</div>

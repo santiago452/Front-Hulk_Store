@@ -60,7 +60,7 @@ export class LoginComponent {
         setTimeout(() => {
           this.mostrarSpinner(false);
           sessionStorage.setItem('usuario', JSON.stringify(verificarUsuario));
-          this.router.navigate(['/Productos']);
+          this.router.navigate(['/']);
         }, 1000);
       }
     }

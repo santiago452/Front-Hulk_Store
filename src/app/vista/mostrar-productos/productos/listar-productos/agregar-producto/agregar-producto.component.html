@@ -1,0 +1,54 @@
+<!-- Hacemos la interfaz de agregar usuario -->
+<div class="container-fluid">
+    <div class="paginaInicial">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #000;">
+                    <h1 class="titulo">Ingresar nuevo Producto</h1>
+                    <!-- Volvemos al componente padre -->
+                    <button mat-raised-button class="botonVolver" color="primary" routerLink="../"><mat-icon>arrow_back</mat-icon></button>
+                </div>
+            </div>
+            <form [formGroup]="formUsuario" novalidate autocomplete="off">
+                <div class="row">
+                    <!-- Comenzamos a maquetar los inputs -->
+                    <div class="col-md-6">
+                        <mat-form-field class=" ms-5 ps-5">
+                            <mat-label>Imagen</mat-label>
+                            <input matInput type="text" formControlName="imagen" name="imagen" placeholder="Ingrese la imagen" required>
+                            <mat-error *ngIf="formUsuario.get('imagen')?.hasError('required')">Por favor ingrese la imagen del producto</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class=" ms-5 ps-5" appearance="fill">
+                            <mat-label>Nombre del producto</mat-label>
+                            <input matInput formControlName="nombre" name="nombre" required>
+                            <mat-error *ngIf="formUsuario.controls['nombre'].errors?.['required']">Por favor ingrese el nombre del producto</mat-error>
+                            <mat-error *ngIf="formUsuario.get('nombre')?.hasError('productoExiste')"> El nombre del producto ya existe</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class=" ms-5 ps-5">
+                            <mat-label>Precio</mat-label>
+                            <input matInput type="text" formControlName="precio" name="precio" required>
+                            <mat-error *ngIf="formUsuario.get('precio')?.hasError('required')">Por favor ingrese el precio del producto</mat-error>
+                            <mat-error *ngIf="formUsuario.get('precio')?.getError('pattern')"> {{formUsuario.get('precio')?.getError('message')}}</mat-error>
+                            
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class=" ms-5 ps-5">
+                            <mat-label>Cantidad disponible del producto</mat-label>
+                            <input matInput type="text" formControlName="cantidad" name="cantidad" required>
+                            <mat-error *ngIf="formUsuario.get('cantidad')?.hasError('required')">Por favor ingrese la cantidad disponible del producto</mat-error>
+                            <mat-error *ngIf="formUsuario.get('cantidad')?.hasError('pattern')">{{ formUsuario.get('cantidad')?.getError('message') }}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+                <div class="d-flex justify-content-center mt-2">
+                    <button mat-raised-button class="botonEnviar" color="primary" (click)="agregarOficina()">Agregar</button>
+                </div>
+            </div>
+        </div>
+</div>

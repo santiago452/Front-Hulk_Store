@@ -92,7 +92,7 @@
                     </div>
                     <div class="note-buttons">
                         <!-- <button class="transparent-button">Aplicar cupón de descuento</button> -->
-                        <button class="red-button">Ir a pagar</button>
+                        <button class="red-button" [disabled]="!usuarioLogueado">Ir a pagar</button>
                     </div>
                     <p class="note-delivery-info text-center">
                         Tiempo de entrega 5 a 15 días hábiles<br>

@@ -9,6 +9,7 @@ import { Usuario } from '../../../models/Usuario';
 // Swal
 import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js';
+import { RolService } from '../../../services/Rol.service';
 
 @Component({
   selector: 'app-crear-cuenta',
@@ -21,6 +22,7 @@ export class CrearCuentaComponent {
   public formSesion!: FormGroup;
 
   servicioUsuario = inject(UsuarioService);
+  servicioRoles = inject(RolService);
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -37,7 +39,6 @@ export class CrearCuentaComponent {
   async crearCuenta(): Promise<void> {
     if(this.formSesion.valid){
       const usuariosAll = await this.servicioUsuario.listarTodos().toPromise() as any;
-      console.log(usuariosAll);
       const usuarioEncontrado = usuariosAll.find((usuario: Usuario) => usuario.correo === this.formSesion.value.email);
       if(usuarioEncontrado){
         Swal.fire({
@@ -53,6 +54,7 @@ export class CrearCuentaComponent {
       const contrasena = this.formSesion.get('contrasena')?.value;
       const encryptedPassoword = CryptoJS.AES.encrypt(contrasena.trim(), 'secret key 123').toString();
       usuario.contrasena = encryptedPassoword;
+      usuario.idRol = await this.servicioRoles.listarPorId(2).toPromise() as any;
       this.servicioUsuario.registrar(usuario).subscribe(
         (response) => {
           console.log(response);
@@ -61,7 +63,10 @@ export class CrearCuentaComponent {
             title: 'Usuario creado',
             text: 'Se ha creado el usuario correctamente',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            willClose: () => {
+              this.router.navigate(['/login']);
+            }
           });
         },
         (error) => {

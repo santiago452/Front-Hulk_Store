@@ -500,3 +500,9 @@
     }
     
 }
+
+/* Button disabled */
+button[disabled] {
+    pointer-events: none;
+    background-color: #c4d1dd;
+}

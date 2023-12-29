@@ -1,5 +1,5 @@
-<section class="gradient-custom vh-100">
-    <div class="container py-5 h-100">
+<section class="gradient-custom ">
+    <div class="container py-5">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
@@ -13,7 +13,7 @@
                     <div class="form-outline form-white mb-4">
                       <mat-form-field class="control"appearance="fill">
                         <mat-label>Correo</mat-label>
-                        <input matInput placeholder="Ingrese correo" formControlName="email"/>
+                        <input matInput placeholder="Ingrese correo" formControlName="email" autocomplete="email"/>
                         <mat-error *ngIf="formSesion.controls['email'].hasError('required')">
                             Por favor ingrese un correo
                         </mat-error>
@@ -24,7 +24,7 @@
                     <div class="form-outline form-white mb-4">
                         <mat-form-field class="control"appearance="fill">
                             <mat-label>Contraseña</mat-label>
-                            <input matInput placeholder="Ingrese contraseña" formControlName="contrasena" type="password" />
+                            <input matInput placeholder="Ingrese contraseña" formControlName="contrasena" type="password" autocomplete="current-password"/>
                             <mat-error *ngIf="formSesion.controls['contrasena'].hasError('required')">
                               El campo es requerido
                             </mat-error>

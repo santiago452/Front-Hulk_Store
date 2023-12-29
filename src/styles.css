@@ -2,3 +2,62 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+td { border: 1px solid #000 !important; text-align: center !important; word-wrap: break-word !important; }
+
+.mat-expansion-panel-body {
+    padding: 0 !important;
+}
+td { border: 1px solid #000 !important; text-align: center !important; word-wrap: break-word !important; }
+table{
+    border: 1px solid #000 !important;
+    text-align: center !important;
+  }
+
+.mat-sort-header-container{
+    justify-content: center !important;
+  }
+  
+.mat-header-cell{
+    text-align: center !important;
+    border-bottom: 1px solid #000 !important;
+
+}
+
+.mat-mdc-card-header{
+    padding: 0px;
+}
+.mdc-data-table__header-cell {
+    text-align: center !important;
+    color: white;
+}
+
+.mat-mdc-table .mdc-data-table__header-row {
+    background-color: #3987e0f5;
+}
+
+.mat-drawer.mat-drawer-side {
+    z-index: 1 !important;
+}
+
+.mdc-text-field--disabled.mdc-text-field--filled{
+    background-color: #ede8e8 !important;
+}
+
+.mat-calendar-table {
+    border: none !important;
+  }
+
+  .mat-calendar-content {
+    background-color: #fff; /* Cambia el color de fondo del calendario */
+  }
+
+  .mat-calendar-body-cell-container{
+    border: none !important;
+  }
+
+  .mat-calendar-body-label{
+    color: #000 !important;
+    border: none !important;
+    text-align: left !important;
+  }

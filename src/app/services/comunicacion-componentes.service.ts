@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
@@ -11,6 +11,21 @@ export class ComunicacionComponentesService {
 
     public carroComprasBehaviorSubject = new BehaviorSubject<any>({});
     public carroCompras: any[] = [];
+    public rutasActivas: string[] = [];
+    router: Router = inject(Router);
+
+    constructor() {
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const url = event.url;
+          this.rutasActivas.push(event.url);
+          // Si la url es diferente a la ruta que se encuentra en el arreglo de rutas activas se elimina la ruta del arreglo
+          if (this.rutasActivas.length > 1) {
+            this.rutasActivas.splice(this.rutasActivas.length - 2, 1);
+          }
+        }
+      });
+    }
 
     // actualizarCarroCompras(valor: any) {this.carroComprasBehaviorSubject.next(valor);}
 

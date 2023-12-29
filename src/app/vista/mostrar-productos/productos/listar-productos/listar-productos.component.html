@@ -1,0 +1,64 @@
+<!-- Comenzamos a maquetar la vista de usuarios -->
+@if (comunicacionComponentes.rutasActivas.includes('/Productos')) {
+    <div #containerUsuario class="container">
+        <mat-card class="mat-elevation-z8">
+          <mat-card-header>
+            <mat-card-title>
+              <h1 class="titulo">Lista de productos</h1>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- Ponemos el mat-form-field a la derecha -->
+            <div class="d-flex justify-content-between">
+                <!-- Colocamos el botón de crear -->
+                <div class="d-flex justify-content-center align-items-center mb-3">
+                    <button mat-raised-button color="primary" routerLink="nuevoProducto" ><mat-icon>add</mat-icon><span class="texto-boton ml-3">Agregar Nuevo Producto</span></button>
+                </div>
+                <mat-form-field >
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Buscar producto"><mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <!-- Creamos la tabla con section para que se pueda hacer scroll -->
+            <section class="example-container mat-elevation-z8" tabindex="0">
+                <table datatable mat-table class="mat-elevation-z8 demo-table" [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                      <td mat-cell *matCellDef="let usuario"> {{usuario.productoId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="imagen">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </th>
+                        <td mat-cell *matCellDef="let usuario"> <img [src]="usuario.imagen" class="product__img" style="width: 124px; height: 100px;"> </td>
+                      </ng-container>
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                      <td mat-cell *matCellDef="let usuario"> {{usuario.nombre}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cantidad">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                      <td mat-cell *matCellDef="let usuario"> {{usuario.cantidad}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="precio">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+                      <td mat-cell *matCellDef="let usuario"> {{usuario.precio}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="acciones">
+                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                      <td mat-cell *matCellDef="let usuario">
+                        <button mat-icon-button color="primary" class="botonEditar mr-2"  [routerLink]="['actualizarProducto', usuario.productoId]" data-bs-toggle="tooltip" data-bs-placement="top" title="Modificar producto">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn"  class="botonEliminar mr-2" (click)="eliminar(usuario.productoId)" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar producto">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+            </section>
+            <mat-paginator [pageSizeOptions]="[4, 5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+          </mat-card-content>
+        </mat-card>
+    </div>
+}
+<router-outlet></router-outlet>

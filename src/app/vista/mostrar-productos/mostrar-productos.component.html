@@ -4,12 +4,35 @@
             <ul class="nav">
                 <li>
                     <!-- Agregar carrito -->
-                    <a routerLink="Carrito"><mat-icon  [matBadge]="servicioComunicacion.carroCompras.length" matBadgeColor="warn">shopping_cart</mat-icon></a>
+                    <a routerLink="Carrito" *ngIf="!isAdministrador" data-bs-toggle="tooltip" data-bs-placement="top" title="Ir al carrito"><mat-icon  [matBadge]="servicioComunicacion.carroCompras.length" matBadgeColor="warn" aria-hidden="false">shopping_cart</mat-icon></a>
+                </li>
+                <!-- Botón para iniciar Sesión -->
+                <li>
+                    @if(!isLogged){
+                        <a routerLink="login" style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar Sesion">
+                            <mat-icon><i class="fa-solid fa-right-to-bracket fa-rotate-180" style="color: #f4f5f6; position: absolute;"></i></mat-icon>
+                        </a>
+                    }
                 </li>
                 <li>
-                    <a (click)="cerrarSesion()" style="cursor: pointer;">
-                        <mat-icon>logout</mat-icon>
-                    </a>
+                    @if(isLogged){
+                        <a (click)="cerrarSesion()" style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cerrar Sesión">
+                            <mat-icon>logout</mat-icon>
+                        </a>
+                    }
+                </li>
+                <!-- Botón para agregar productos -->
+                <li>
+                    @if(isAdministrador){
+                        <!-- Un matMenuTriggerFor -->
+                        <button mat-icon-button [matMenuTriggerFor]="menuAdministrador" style="background: transparent; border: none; color: white;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver opciones">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <mat-menu #menuAdministrador="matMenu">
+                            <button mat-menu-item routerLink="Productos">Agregar Producto</button>
+                            <button mat-menu-item routerLink="Usuarios">Agregar Usuario</button>
+                        </mat-menu>
+                    }
                 </li>
             </ul>
         </div>
